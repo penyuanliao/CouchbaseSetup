@@ -1,6 +1,15 @@
 # CouchbaseSetup
 設定安裝Couchbase
 
+
+
+
+建立架構圖
+
+
+[AS3] ----(HTTP GET)----> [AMFPHP] ----(HTTP GET)----> [couchbase]
+[AS3] ----(HTTP GET)----> [AMFPHP] ----(Socket)----> [couchbase]
+
 ###CentOS編譯安裝NodeJS+Express
 
 ###setup 1.下載NODE.js 
