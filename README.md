@@ -39,3 +39,24 @@ npm install -g express-generator
 ```shell
 experss [專案名稱]
 ```
+
+
+
+
+### Setup php extension error
+
+Fault-1 : `make: *** [bucket.lo] Error 1`
+
+Asnwer  : 需要更新c sdk (Get and install the C Library. The C SDK is a requirement for the PHP library.)
+
+http://docs.couchbase.com/couchbase-sdk-c-2.3/
+RHEL/CentOS 6.2
+```shell
+#下載自動安裝工具的couchbase網址
+sudo wget -O/etc/yum.repos.d/couchbase.repo \
+           http://packages.couchbase.com/rpm/couchbase-centos62-x86_64.repo
+#下載自動安裝工具更新
+sudo yum check-update
+#下載自動安裝工安裝下面兩個元件
+sudo yum install -y  libcouchbase2-libevent libcouchbase-devel
+```
