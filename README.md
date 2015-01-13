@@ -1,14 +1,14 @@
 # CouchbaseSetup
 設定安裝Couchbase
 
-
-
-
 建立架構圖
-
 
 [AS3] ----(HTTP GET)----> [AMFPHP] ----(HTTP GET)----> [couchbase]
 [AS3] ----(HTTP GET)----> [AMFPHP] ----(Socket)----> [couchbase]
+
+```
+rpm --install couchbase-server-enterprise-3.0.2-centos6.x86_64.rpm
+```
 
 ##CentOS編譯安裝NodeJS+Express
 
