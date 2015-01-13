@@ -6,7 +6,9 @@
 [AS3] ----(HTTP GET)----> [AMFPHP] ----(HTTP GET)----> [couchbase]
 [AS3] ----(HTTP GET)----> [AMFPHP] ----(Socket)----> [couchbase]
 
-```
+
+###Installing
+```shell
 rpm --install couchbase-server-enterprise-3.0.2-centos6.x86_64.rpm
 ```
 
