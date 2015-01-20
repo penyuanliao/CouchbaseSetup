@@ -1,0 +1,332 @@
+Index: amfphp/core/amf/util/DateWrapper.php
+===================================================================
+--- amfphp/core/amf/util/DateWrapper.php	(wersja 63274)
++++ amfphp/core/amf/util/DateWrapper.php	(kopia robocza)
+@@ -62,7 +62,7 @@
+ 	/**
+ 	 * Get timezone
+ 	 */
+-	function getTimezone($val=NULL)
++	static function getTimezone($val=NULL)
+ 	{
+ 		static $timezone = 0;
+ 		if($val != NULL)
+@@ -75,7 +75,7 @@
+ 	/**
+ 	 * Set timezone
+ 	 */
+-	function setTimezone($val=0){
++	static function setTimezone($val=0){
+ 		return DateWrapper::getTimezone($val);
+ 	}
+ }
+Index: amfphp/core/shared/app/php5Executive.php
+===================================================================
+--- amfphp/core/shared/app/php5Executive.php	(wersja 63274)
++++ amfphp/core/shared/app/php5Executive.php	(kopia robocza)
+@@ -52,7 +52,7 @@
+ 	 * @param array $a Arguments to pass to the method
+ 	 * @return mixed The results from the method operation
+ 	 */
+-	function doMethodCall(&$bodyObj, &$object, $method, $args)
++	static function doMethodCall(&$bodyObj, &$object, $method, $args)
+ 	{
+ 		try
+ 		{
+@@ -62,7 +62,7 @@
+ 		{
+ 			if(get_class($fault) == "VerboseException")
+ 			{
+-				$ex = new MessageException($fault->code, $fault->getMessage(), $fault->file, $fault->line, 'AMFPHP_RUNTIME_ERROR');
++				$ex = new MessageException($fault->getCode(), $fault->getMessage(), $fault->getFile(), $fault->getLine(), 'AMFPHP_RUNTIME_ERROR');
+ 			}
+ 			else
+ 			{
+@@ -83,7 +83,7 @@
+ 	 * Builds a class using a class name
+ 	 * If there is a failure, catch the error and return to caller
+ 	 */
+-	function buildClass(&$bodyObj, $className)
++	static function buildClass(&$bodyObj, $className)
+ 	{
+ 		global $amfphp;
+ 		if(isset($amfphp['classInstances'][$className]))
+@@ -114,7 +114,7 @@
+ 	 * an error handler which seems to break the convential rule for working with exceptions
+ 	 * Nesting function calls seems to solve the problem, but not nesting try...catch
+ 	 */
+-	function deferredMethodCall(&$bodyObj, &$object, $method, $args)
++	static function deferredMethodCall(&$bodyObj, &$object, $method, $args)
+ 	{
+ 		try
+ 		{
+@@ -131,7 +131,7 @@
+ 		{
+ 			if(get_class($fault) == "VerboseException")
+ 			{
+-				$ex = new MessageException($fault->code, $fault->getMessage(), $fault->file, $fault->line, 'AMFPHP_RUNTIME_ERROR');
++				$ex = new MessageException($fault->getCode(), $fault->getMessage(), $fault->getFile(), $fault->getLine(), 'AMFPHP_RUNTIME_ERROR');
+ 			}
+ 			else
+ 			{
+@@ -154,7 +154,7 @@
+ 	 * Include a class
+ 	 * If there is an error, catch and return to caller
+ 	 */
+-	function includeClass(&$bodyObj, $location)
++	static function includeClass(&$bodyObj, $location)
+ 	{
+ 		$included = false;
+ 		try
+@@ -167,7 +167,7 @@
+ 			$included = false;
+ 			if(get_class($fault) == "VerboseException")
+ 			{
+-				$ex = new MessageException($fault->code, $fault->getMessage(), $fault->file, $fault->line, 'AMFPHP_INCLUDE_ERROR');
++				$ex = new MessageException($fault->getCode(), $fault->getMessage(), $fault->getFile(), $fault->getLine(), 'AMFPHP_INCLUDE_ERROR');
+ 			}
+ 			else
+ 			{
+Index: amfphp/core/shared/exception/MessageException.php
+===================================================================
+--- amfphp/core/shared/exception/MessageException.php	(wersja 63274)
++++ amfphp/core/shared/exception/MessageException.php	(kopia robocza)
+@@ -54,7 +54,7 @@
+ 	 * @param AMFException @exception The exception object to throw
+ 	 * @see AMFBody
+ 	 */
+-	function throwException (&$body, $exception) {
++	static function throwException (&$body, $exception) {
+ 		$body->responseURI = $body->responseIndex . "/onStatus";
+ 		$results = &$body->getResults();
+ 
+@@ -82,7 +82,7 @@
+ 		}
+ 	}
+ 
+-	function getFriendlyError ($err) {
++	static function getFriendlyError ($err) {
+ 		$errortype = array (1 => "Error",
+ 			2 => "Warning",
+ 			4 => "Parsing Error",
+Index: amfphp/core/shared/util/CharsetHandler.php
+===================================================================
+--- amfphp/core/shared/util/CharsetHandler.php	(wersja 63274)
++++ amfphp/core/shared/util/CharsetHandler.php	(kopia robocza)
+@@ -81,7 +81,7 @@
+ 	 *
+ 	 * @param string $location One of "none", "iconv", "mbstring", "recode"
+ 	 */
+-	function getMethod($val=NULL)
++	static function getMethod($val=NULL)
+ 	{
+ 		static $method = 0;
+ 		if($val != NULL)
+@@ -95,11 +95,11 @@
+ 		return $method;
+ 	}
+ 
+-	function setMethod($val=0){
++	static function setMethod($val=0){
+ 		return CharsetHandler::getMethod($val);
+ 	}
+ 
+-	function getPhpCharset($val=NULL)
++	static function getPhpCharset($val=NULL)
+ 	{
+ 		static $phpCharset = 0;
+ 		if($val != NULL)
+@@ -109,11 +109,11 @@
+ 		return $phpCharset;
+ 	}
+ 
+-	function setPhpCharset($val=0){
++	static function setPhpCharset($val=0){
+ 		return CharsetHandler::getPhpCharset($val);
+ 	}
+ 
+-	function getSqlCharset($val=NULL)
++	static function getSqlCharset($val=NULL)
+ 	{
+ 		static $sqlCharset = 0;
+ 		if($val != NULL)
+@@ -123,7 +123,7 @@
+ 		return $sqlCharset;
+ 	}
+ 
+-	function setSqlCharset($val=0){
++	static function setSqlCharset($val=0){
+ 		return CharsetHandler::getSqlCharset($val);
+ 	}
+ }
+Index: amfphp/core/shared/util/Headers.php
+===================================================================
+--- amfphp/core/shared/util/Headers.php	(wersja 63274)
++++ amfphp/core/shared/util/Headers.php	(kopia robocza)
+@@ -13,7 +13,7 @@
+ 
+ class Headers
+ {
+-	function setHeader($key=NULL, $val=NULL)
++	static function setHeader($key=NULL, $val=NULL)
+ 	{
+ 		static $headers = array();
+ 		if($val !== NULL)
+@@ -23,7 +23,7 @@
+ 		return $headers[$key];
+ 	}
+ 
+-	function getHeader($key)
++	static function getHeader($key)
+ 	{
+ 		return Headers::setHeader($key);
+ 	}
+Index: amfphp/core/shared/util/MethodTable.php
+===================================================================
+--- amfphp/core/shared/util/MethodTable.php	(wersja 63274)
++++ amfphp/core/shared/util/MethodTable.php	(kopia robocza)
+@@ -50,7 +50,7 @@
+ 	 *        May also simply be __FILE__
+ 	 * @param $servicePath(String) The location of the classes (optional)
+ 	 */
+-	function create($className, $servicePath = NULL, &$classComment){
++	static function create($className, $servicePath = NULL, &$classComment){
+ 
+ 		$methodTable = array();
+ 		if(file_exists($className))
+@@ -140,7 +140,7 @@
+ 		return $methodTable;
+ 	}
+ 
+-	function getClassMethodsReflection($sourcePath, $className, & $classComment)
++	static function getClassMethodsReflection($sourcePath, $className, & $classComment)
+ 	{
+ 		//Include the class in question
+ 		$dir = dirname($sourcePath);
+@@ -215,7 +215,7 @@
+ 		return $methodTable;
+ 	}
+ 
+-	function getClassMethodsTokenizer($sourcePath, $className, & $classComment)
++	static function getClassMethodsTokenizer($sourcePath, $className, & $classComment)
+ 	{
+ 		$source = file_get_contents($sourcePath);
+ 		$tokens = token_get_all($source);
+@@ -350,7 +350,7 @@
+ 	/**
+ 	 *
+ 	 */
+-	function getMethodCommentArguments($comment)
++	static function getMethodCommentArguments($comment)
+ 	{
+ 		$pieces = explode('@param', $comment);
+ 		$args = array();
+@@ -375,7 +375,7 @@
+ 	 * @private
+ 	 * @param $comment(String) The method's comment.
+ 	 */
+-	function getMethodDescription($comment){
++	static function getMethodDescription($comment){
+ 		$comment = MethodTable::cleanComment(strrstr($comment, "@"));
+ 		return trim($comment);
+ 	}
+@@ -389,7 +389,7 @@
+ 	 * @param $comment(String) The method's comment.
+ 	 * @param $attribute(String) The name of the attribute to get its value from.
+ 	 */
+-	function getMethodCommentAttribute($comment, $attribute){
++	static function getMethodCommentAttribute($comment, $attribute){
+ 		$pieces = strstrafter($comment, '@' . $attribute);
+ 		if($pieces !== FALSE)
+ 		{
+@@ -408,7 +408,7 @@
+ 	 * @param $comment(String) The method's comment.
+ 	 * @param $attribute(String) The name of the attribute to get its value from.
+ 	 */
+-	function getMethodCommentAttributeFirstLine($comment, $attribute){
++	static function getMethodCommentAttributeFirstLine($comment, $attribute){
+ 		$pieces = strstrafter($comment, '@' . $attribute);
+ 		if($pieces !== FALSE)
+ 		{
+@@ -424,7 +424,7 @@
+ 		return "";
+ 	}
+ 
+-	function getMethodCommentAttributeFirstWord($comment, $attribute){
++	static function getMethodCommentAttributeFirstWord($comment, $attribute){
+ 		$pieces = strstrafter($comment, '@' . $attribute);
+ 		if($pieces !== FALSE)
+ 		{
+@@ -441,7 +441,7 @@
+ 	 * @access private
+ 	 * @param $methodSignature (String)The method's signatureg;
+ 	 */
+-	function getMethodArguments($methodSignature, $commentParams){
++	static function getMethodArguments($methodSignature, $commentParams){
+ 		if(strlen($methodSignature) < 2){
+ 			//no arguments, return an empty array
+ 			$result = array();
+@@ -463,7 +463,7 @@
+ 	 * @access private
+ 	 * @param $args(Array) The "dirty" array with arguments.
+ 	 */
+-	function cleanArguments($args, $commentParams){
++	static function cleanArguments($args, $commentParams){
+ 		$result = array();
+ 
+ 		foreach($args as $index => $arg){
+@@ -497,7 +497,7 @@
+ 	 * @private
+ 	 * @param $comment(String) The method's comment.
+ 	 */
+-	function cleanComment($comment){
++	static function cleanComment($comment){
+ 		$comment = str_replace("/**", "", $comment);
+ 		$comment = str_replace("*/", "", $comment);
+ 		$comment = str_replace("*", "", $comment);
+@@ -513,7 +513,7 @@
+ 	/**
+ 	 *
+ 	 */
+-	function showCode($methodTable){
++	static function showCode($methodTable){
+ 
+ 
+ 		foreach($methodTable as $methodName=>$methodProps){
+Index: amfphp/core/shared/util/NetDebug.php
+===================================================================
+--- amfphp/core/shared/util/NetDebug.php	(wersja 63274)
++++ amfphp/core/shared/util/NetDebug.php	(kopia robocza)
+@@ -15,7 +15,7 @@
+ 	/**
+ 	 * Don't do anything, just in case something pops up that needs to be initialized
+ 	 */
+-	function initialize()
++	static function initialize()
+ 	{
+ 
+ 	}
+@@ -25,12 +25,12 @@
+ 	 *
+ 	 * Note emulation of static variables
+ 	 */
+-	function trace($what)
++	static function trace($what)
+ 	{
+ 		NetDebug::getTraceStack($what);
+ 	}
+ 
+-	function printr($what)
++	static function printr($what)
+ 	{
+ 		ob_start();
+ 		print_r($what);
+@@ -38,7 +38,7 @@
+ 		NetDebug::getTraceStack($result);
+ 	}
+ 
+-	function getTraceStack($val=NULL)
++	static function getTraceStack($val=NULL)
+ 	{
+ 		static $traceStack = array();
+ 		if($val !== NULL)
