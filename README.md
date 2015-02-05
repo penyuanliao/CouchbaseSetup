@@ -55,7 +55,7 @@ sudo pecl search couchbase
 #執行安裝
 sudo pecl install couchbase
 ```
-自己編譯檔案
+自己編譯檔案Downlod: <https://github.com/couchbase/php-ext-couchbase>
 ```shell
 #https://github.com/couchbase/php-ext-couchbase
 
