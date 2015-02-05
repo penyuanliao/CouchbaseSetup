@@ -3,9 +3,9 @@
 
 建立架構圖
 
-[AS3] ----(HTTP GET)----> [AMFPHP] ----(HTTP GET)----> [couchbase]
+[AS3] ----(HTTP GET)----> [AMFPHP] ----(Binary Protocl)----> [couchbase]
 
-[AS3] ----(HTTP GET)----> [AMFPHP] ----(Socket)----> [couchbase]
+[AS3] ----(HTTP GET)----> [AMFPHP] ----(Binary Protocl)----> [couchbase]
 
 ###Installing
 ```shell
