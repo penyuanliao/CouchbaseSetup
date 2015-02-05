@@ -44,6 +44,14 @@ experss [專案名稱]
 
 ##CentOS編譯安裝PHP Extension
 
+###setup 0.必須先安裝Couchbse Client C SDK 
+下載version 2.4:http://packages.couchbase.com/clients/c/libcouchbase-2.4.6_centos62_x86_64.tar
+```shell
+$ tar xf libcouchbase-2.4.0.tar.gz
+$ cd libcouchbase-2.4.0
+$ ./configure
+$ sudo make install
+```
 ###setup 1.安裝Couchbse Client SDK 
 
 透過 Pecl是PHP擴展庫路徑在/php/bin/pecl
