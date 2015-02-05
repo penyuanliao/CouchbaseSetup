@@ -50,11 +50,21 @@ experss [專案名稱]
 
 ```shell
 #搜尋是否有couchbase
+#http://pecl.php.net/package/couchbase
 sudo pecl search couchbase
 #執行安裝
 sudo pecl install couchbase
 ```
+自己編譯檔案
+```shell
+#https://github.com/couchbase/php-ext-couchbase
 
+$ phpize
+$ ./configure
+$ make
+$ make test
+
+```
 ###setup 2.設定php.ini
 設定完成後服務需要重開。(service httpd stop;service httpd start;)
 
@@ -83,3 +93,4 @@ sudo yum check-update
 #下載自動安裝工安裝下面兩個元件
 sudo yum install -y  libcouchbase2-libevent libcouchbase-devel
 ```
+
