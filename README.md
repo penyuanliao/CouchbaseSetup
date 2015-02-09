@@ -10,7 +10,28 @@
 ###Installing
 ```shell
 rpm --install couchbase-server-enterprise-3.0.2-centos6.x86_64.rpm
+
+#手動設定
+iUSR=你的帳號
+iPWD=你的密碼
+iBucket=你的DB名稱
+iRamsize=伺服器給Cluster大小(mb)
+iBucketRamsize=couchbase給Bucket大小(mb)
+#
+#初始化couchbase參數
+#
+/opt/couchbase/bin/couchbase-cli cluster-init -c 127.0.0.1:8091 --cluster-init-username=$iUSR --cluster-init-password=$iPWD --cluster-init-ramsize=$iRamsize
+#
+#建立一個新的bucket
+#
+/opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --bucket=$iBucket --bucket-type=couchbase --bucket-port=11222 --bucket-ramsize=200 --bucket-replica=1
+
+#
+#XDCR
+#
+/opt/couchbase/bin/couchbase-cli xdcr-setup -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --create --xdcr-cluster-name=cluster1 --xdcr-hostname=127.0.0.1:8091 --xdcr-username=$iUSR --xdcr-password=$iPWD
 ```
+
 
 ##CentOS編譯安裝NodeJS+Express
 
