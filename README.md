@@ -29,12 +29,12 @@ iBucketRamsize=couchbase給Bucket大小(mb)
 #
 #create group
 #
-/opt/couchbase/bin/couchbase-cli group-manage -c 172.17.188.201:8091 --create --group-name=fxgroup -u $iUSR -p $iPWD
+/opt/couchbase/bin/couchbase-cli group-manage -c <localhost>:8091 --create --group-name=fxgroup -u $iUSR -p $iPWD
 
 #
 #建立伺服器
 #
-/opt/couchbase/bin/couchbase-cli server-add -c 127.0.0.1:8091 --server-add=172.17.188.201:8091 --server-add-username=$iUSR --server-add-password=$iPWD --group-name=fxgroup -u $iUSR -p $iPWD
+/opt/couchbase/bin/couchbase-cli server-add -c <localhost>:8091 --server-add=<add_server_ip>:8091 --server-add-username=$iUSR --server-add-password=$iPWD --group-name=fxgroup -u $iUSR -p $iPWD
 
 #
 # 刪除伺服器
