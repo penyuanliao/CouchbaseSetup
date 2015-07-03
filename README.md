@@ -38,6 +38,25 @@ sudo rpm -e couchbase-server
 
 copy
 scp couchbase-server-enterprise-3.0.3-centos6.x86_64.rpm name@ip:/tmp
+
+# Disable Transparent Huge Pages (THP)
+sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled
+sudo echo never > /sys/kernel/mm/transparent_hugepage/defrag
+sudo cp -p /etc/rc.local /etc/rc.local.`date +%Y%m%d-%H:%M`
+
+
+#Swappiness should to be turned off
+# Set the value for the running system
+sudo echo 0 > /proc/sys/vm/swappiness
+
+# Backup sysctl.conf
+sudo cp -p /etc/sysctl.conf /etc/sysctl.conf.`date +%Y%m%d-%H:%M`
+
+# Set the value in /etc/sysctl.conf so it stays after reboot.
+sudo echo '' >> /etc/sysctl.conf
+sudo echo '#Set swappiness to 0 to avoid swapping' >> /etc/sysctl.conf
+sudo echo 'vm.swappiness = 0' >> /etc/sysctl.conf
+
 ```
 
 
