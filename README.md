@@ -27,12 +27,17 @@ iBucketRamsize=couchbase給Bucket大小(mb)
 /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --bucket=$iBucket --bucket-type=couchbase --bucket-port=11222 --bucket-ramsize=200 --bucket-replica=1
 
 #
+# 刪除伺服器
+#
+/opt/couchbase/bin/couchbase-cli rebalance -u $iUSR -p $iPWD -c <localhost>:8091 --server-remove=<Server_IP>:8091
+
+#
 #XDCR
 #
 /opt/couchbase/bin/couchbase-cli xdcr-setup -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --create --xdcr-cluster-name=cluster1 --xdcr-hostname=127.0.0.1:8091 --xdcr-username=$iUSR --xdcr-password=$iPWD
 ```
 
-```
+```shell
 #uninstall
 sudo rpm -e couchbase-server
 
