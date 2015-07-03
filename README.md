@@ -27,6 +27,16 @@ iBucketRamsize=couchbase給Bucket大小(mb)
 /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --bucket=$iBucket --bucket-type=couchbase --bucket-port=11222 --bucket-ramsize=200 --bucket-replica=1
 
 #
+#create group
+#
+/opt/couchbase/bin/couchbase-cli group-manage -c 172.17.188.201:8091 --create --group-name=fxgroup -u $iUSR -p $iPWD
+
+#
+#建立伺服器
+#
+/opt/couchbase/bin/couchbase-cli server-add -c 127.0.0.1:8091 --server-add=172.17.188.201:8091 --server-add-username=$iUSR --server-add-password=$iPWD --group-name=fxgroup -u $iUSR -p $iPWD
+
+#
 # 刪除伺服器
 #
 /opt/couchbase/bin/couchbase-cli rebalance -u $iUSR -p $iPWD -c <localhost>:8091 --server-remove=<Server_IP>:8091
