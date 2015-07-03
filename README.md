@@ -32,6 +32,14 @@ iBucketRamsize=couchbase給Bucket大小(mb)
 /opt/couchbase/bin/couchbase-cli xdcr-setup -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --create --xdcr-cluster-name=cluster1 --xdcr-hostname=127.0.0.1:8091 --xdcr-username=$iUSR --xdcr-password=$iPWD
 ```
 
+```
+#uninstall
+sudo rpm -e couchbase-server
+
+copy
+scp couchbase-server-enterprise-3.0.3-centos6.x86_64.rpm name@ip:/tmp
+```
+
 
 ##CentOS編譯安裝NodeJS+Express
 
