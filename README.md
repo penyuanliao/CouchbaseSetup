@@ -165,3 +165,18 @@ sudo yum check-update
 sudo yum install -y  libcouchbase2-libevent libcouchbase-devel
 ```
 
+#YCSB 安裝經驗
+```shell
+#先設定JAVA_HOME
+#In this example /usr/java/jdk1.6.0_19 is the JDK installation directory.
+export JAVA_HOME=/usr/java/jdk1.6.0_19
+export PATH=$PATH:$JAVA_HOME/bin
+
+#安裝Maven
+http://maven.apache.org/install.html
+
+./bin/ycsb load redis -p redis.host=localhost -p redis.port=6379 -P workloads/workloada -p recordcount=200000 -s > d.dat
+
+```
+
+
