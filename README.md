@@ -177,6 +177,15 @@ http://maven.apache.org/install.html
 
 ./bin/ycsb load redis -p redis.host=localhost -p redis.port=6379 -P workloads/workloada -p recordcount=200000 -s > d.dat
 
+
 ```
 
+# Install perfrunner
+```shell
+#url:https://github.com/couchbase/perfrunner
 
+#rpm 安裝問題
+rpm -ivh --force --nodeps --install *.rpm
+
+
+```
