@@ -194,8 +194,10 @@ rpm -ivh --force --nodeps --install *.rpm
 Couchbase : 8 
 CPU : Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz
 Core : 62
-RAM : 64 Gb
-
+RAM : 64 GB
+Bucket Type : membase
+RamQuota : 480 GB
+RamUsed : 383.78 GB
 ---------- AverageLatency(us) ----------
 
 Ops        READ 	INSERT	CLEANUP
