@@ -252,4 +252,10 @@ Ops        RunTime(ms)           Throughput(ops/sec)
 #Balanced : 200,000 ?
 #throughput : 400,000 ?
 #Latency : 1 milliseconds ?
+#Insert Throughput : 350,000
+#Read-Heavy (90/10) : 38,000
+
+#K/V Read Testing:throughput : 16,678
+#K/V Write Testing:throughput : 4,170
+
 ```
