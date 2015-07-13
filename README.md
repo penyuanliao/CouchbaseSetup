@@ -248,4 +248,8 @@ Ops        RunTime(ms)           Throughput(ops/sec)
 60000	14412	           4163
 70000	41361	           1692.415561
 
+
+#Balanced : 200,000 ?
+#throughput : 400,000 ?
+#Latency : 1 milliseconds ?
 ```
