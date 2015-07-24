@@ -258,4 +258,5 @@ Ops        RunTime(ms)           Throughput(ops/sec)
 #K/V Read Testing:throughput : 16,678
 #K/V Write Testing:throughput : 4,170
 # http://blog.couchbase.com/dissecting-nosql-benchmark
+# 測試問題:遇到頻寬不足問題,ycsb server超出10GbE頻寬
 ```
