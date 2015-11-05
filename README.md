@@ -7,6 +7,12 @@
 
 [AS3] ----(HTTP GET)----> [AMFPHP] ----(Binary Protocl)----> [couchbase]
 
+###log
+```
+2015/11/05 couchbase 4.0 "ERROR: command: cluster-init: 127.0.0.1:8091, too many values to unpack"
+在指令後面增加 --service='data;index;query'
+```
+
 ###Installing
 ```shell
 rpm --install couchbase-server-enterprise-3.0.2-centos6.x86_64.rpm
