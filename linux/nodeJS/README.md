@@ -1,5 +1,5 @@
 ### nodeJS升級v0.11.x時候出現/usr/lib/libstdc++.so.6: version `GLIBCXX_3.4.15' not found
-
+### CentOS 6.5
 查詢目前支援版本
 ```shell
 strings /usr/lib64/libstdc++.so.6 | grep GLIBC
