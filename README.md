@@ -7,6 +7,14 @@
 
 [AS3] ----(HTTP GET)----> [AMFPHP] ----(Binary Protocl)----> [couchbase]
 
+###Couchbase Path
+```
+#bin
+/opt/couchbase/bin
+#data
+/opt/couchbase/var/lib
+```
+
 ###log
 ```
 2015/11/05 couchbase 4.0 "ERROR: command: cluster-init: 127.0.0.1:8091, too many values to unpack"
