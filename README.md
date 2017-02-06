@@ -240,7 +240,7 @@ Ops        READ 	INSERT	CLEANUP
 ---------- RunTime & Throughput ----------
 
 Ops        RunTime(ms)           Throughput(ops/sec)
-1000	896	           1116.07 
+1000	896                   1116.07 
 2000	1198	           1669.45 
 4000	1877	           2131.06 
 6000	2482	           2417.41 
