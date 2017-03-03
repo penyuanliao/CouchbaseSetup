@@ -39,8 +39,9 @@ iBucketRamsize=couchbase給Bucket大小(mb)
 #建立一個新的bucket
 #
 /opt/couchbase/bin/couchbase-cli bucket-create -c 127.0.0.1:8091 --user=$iUSR --password=$iPWD --bucket=$iBucket --bucket-type=couchbase --bucket-port=11222 --bucket-ramsize=200 --bucket-replica=1
-#CentOS init 設定參數
+#CentOS7 init 設定參數
 ```shell
+
 #swappiness必須設定為0
 #檢查狀態
 cat /proc/sys/vm/swappiness 
@@ -50,6 +51,20 @@ sudo sysctl vm.swappiness=0
 #再重新啟動時候會被初始化為預設值CentOS7位置比較特殊
 /usr/lib/tuned/virtual-guest/tuned.conf
 vm.swappiness=0
+
+#disable Transparent Huge Pages(THP)
+#檢查狀態
+cat /sys/kernel/mm/transparent_hugepage/enabled
+cat /sys/kernel/mm/transparent_hugepage/defrag
+#必須 always madvise [never]
+
+sudo mv disable-thp /etc/init.d/
+
+sudo chmod 755 disable-thp
+
+sudo service disable-thp start
+
+sudo chkconfig disable-thp on
 
 ```
 #
