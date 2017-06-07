@@ -23,7 +23,7 @@
 
 ###Installing
 ```shell
-rpm --install couchbase-server-enterprise-3.0.2-centos6.x86_64.rpm
+sudo rpm --install couchbase-server-enterprise-3.0.2-centos6.x86_64.rpm
 
 #手動設定
 iUSR=你的帳號
