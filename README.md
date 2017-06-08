@@ -1,5 +1,10 @@
 # CouchbaseToAmfphp
 設定安裝Couchbase
+###已知問題
+```
+#1. 如果舊系統Bucket將新版本加入群組cluster,然後移除舊系統會造成寫入服務堵住問題, 記得要重新建立bucket不要直接使用!!
+```
+
 
 建立架構圖
 
